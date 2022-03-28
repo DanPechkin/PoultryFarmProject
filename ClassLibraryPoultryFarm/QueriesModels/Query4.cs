@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Poultry_farm.Models
+﻿namespace ClassLibraryPoultryFarm.QueriesModels
 {
-     public class Query4
+     public record Query4
     {
         public string Surname { get; set; }
 

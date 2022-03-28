@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Poultry_farm.Models
+﻿namespace ClassLibraryPoultryFarm.QueriesModels
 {
-    public class Query3
+    public record Query3
     {
         public int NumberOfCages { get; set; }
 

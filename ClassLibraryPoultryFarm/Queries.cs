@@ -4,7 +4,6 @@ using System.Linq;
 using ClassLibraryPoultryFarm.Persistence;
 using ClassLibraryPoultryFarm.QueriesModels;
 using Microsoft.EntityFrameworkCore;
-using Poultry_farm.Models;
 
 namespace ClassLibraryPoultryFarm
 {
@@ -101,12 +100,11 @@ namespace ClassLibraryPoultryFarm
                     .Include(c=>c.Worker)
                     .Include(c=>c.Chicken)
                     .ThenInclude(c=>c.Production)
-                    .GroupBy(c => c.Worker.Surname)
+                    .GroupBy(c => c.Worker.Surname, c => c.Chicken.Production)
                     .Select(c => new Query5
                     {
-                        AverageEggs = c.Average(a => a.Chicken.Production.NumberOfEggs),
+                        AverageEggs = c.Average(a => a.NumberOfEggs),
                         Surname = c.Key
-
                     });
 
                 return result.ToList();
