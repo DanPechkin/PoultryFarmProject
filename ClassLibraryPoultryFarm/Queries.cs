@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ClassLibraryPoultryFarm.Persistence;
 using ClassLibraryPoultryFarm.QueriesModels;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,9 @@ namespace ClassLibraryPoultryFarm
 {
     public static class Queries
     {
-        public static ICollection<Query1> Query1(double weight, int age, string breed)
+        public static async Task<ICollection<Query1>> Query1Async(double weight, int age, string breed)
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Production
                     .Include(p => p.Chicken)
@@ -26,14 +27,14 @@ namespace ClassLibraryPoultryFarm
                         NumberofEggs = a.NumberOfEggs
                     });
 
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
 
         //Запрос 2. В каком цеху наибольшее количество кур определенной породы? 
-        public static Query2 Query2(string breedname)
+        public static async Task <Query2> Query2Async(string breedname)
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Cages
                     .Include(c=>c.Chicken)
@@ -53,9 +54,9 @@ namespace ClassLibraryPoultryFarm
             }
         }
         //Запрос 3. В каких клетках находятся куры указанного возраста с заданным номером диеты?
-        public static ICollection<Query3> Query3(int age, int diet)
+        public static async Task<ICollection<Query3>> Query3Async(int age, int diet)
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Cages
                     .Include(c=>c.Chicken)
@@ -69,14 +70,14 @@ namespace ClassLibraryPoultryFarm
                         DietNumber = g.Chicken.Breed.Diet.Number
                     });
 
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
 
         //Запрос 4. Сколько яиц в день приносят куры, указанного работника
-        public static ICollection<Query4> Query4(string surname)
+        public static async Task<ICollection<Query4>> Query4Async(string surname)
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Cages
                     .Include(c=>c.Worker)
@@ -87,14 +88,14 @@ namespace ClassLibraryPoultryFarm
                         NumberOfEggs = c.Chicken.Production.NumberOfEggs,
                         ChickenId = c.Id
                     });
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
 
         //Запрос 5. Среднее количество яиц, которое получает в день каждый работник от обслуживаемых им кур
-        public static ICollection<Query5> Query5()
+        public  static async Task<ICollection<Query5>> Query5Async()
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Cages
                     .Include(c=>c.Worker)
@@ -107,15 +108,15 @@ namespace ClassLibraryPoultryFarm
                         Surname = c.Key
                     });
 
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
 
         //Запрос 6 В каком цеху курица, от которой получают больше всего яиц
 
-        public static Query6 Query6()
+        public static async Task<Query6> Query6Async()
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Chickens
                     .Include(c => c.Production)
@@ -135,9 +136,9 @@ namespace ClassLibraryPoultryFarm
 
         //Запрос 7 Сколько кур каждой породы в каждом цехе? 
         
-        public static ICollection<Query7> Query7()
+        public static async Task<ICollection<Query7>> Query7Async()
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Chickens
                     .Include(c => c.Breed)
@@ -150,16 +151,16 @@ namespace ClassLibraryPoultryFarm
                         NumberOfBreed = c.Count(),
                         ShopName = c.Key.ShopName
                     });
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
 
         //Запрос 8. Какое количество кур обслуживает каждый работник
         
 
-        public static ICollection<Query8> Query8s()
+        public static async Task<ICollection<Query8>> Query8Async()
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Chickens
                     .Include(c => c.Cage)
@@ -170,15 +171,15 @@ namespace ClassLibraryPoultryFarm
                         Surname = c.Key,
                         NumberOfChickens = c.Count()
                     });
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
 
         //Запрос 9.Какова для каждой породы разница между показателями породы и средними показателями по птицефабрике?
 
-        public static ICollection<Query9> Query9()
+        public static async Task<ICollection<Query9>> Query9Async()
         {
-            using (AppDbContext context = new AppDbContext())
+            await using (AppDbContext context = new AppDbContext())
             {
                 var result = context.Breeds
                     .Include(b => b.Chickens)
@@ -197,7 +198,7 @@ namespace ClassLibraryPoultryFarm
                         Difference = Math.Abs(arg.AverageEggsBreed - arg.AverageProduction)
                     });
 
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
     }

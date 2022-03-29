@@ -1,0 +1,88 @@
+﻿<Window x:Class="WPF_PoultryFarmProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_PoultryFarmProject"
+        mc:Ignorable="d"
+        Name ="This"
+        Title="Птицефабрика" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="280*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Пункты меню-->
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Запросы">
+                <MenuItem Header="Количество яиц от курицы заданной породы, веса, возраста" Click="Query1_OnClick"></MenuItem>
+                <MenuItem Header="Цех, с наибольшим количеством кур" Click="Query2_ClickOn"></MenuItem>
+                <MenuItem Header="Клетки с курами заданного возраста и диеты" Click="Query3_OnClick"></MenuItem>
+                <MenuItem Header="Количество яиц в день от кур указанного сотрудника" Click="Query4_OnClick"></MenuItem>
+                <MenuItem Header="Среднее количество яиц каждого сотрудника от обслуживаемых кур" Click="Query5_OnClick"></MenuItem>
+                <MenuItem Header="Цех, с курицей с максимальным количестом яиц" Click="Query6_OnClick"></MenuItem>
+                <MenuItem Header="Сколько кур каждой породы в каждом цеху" Click="Query7_OnClick"></MenuItem>
+                <MenuItem Header="Количество кур, обслуживаемых каждым сотрудником" Click="Query8_OnClick"></MenuItem>
+                <MenuItem Header="Разница между показателями породы и средними показателями по птицефабрике" Click="Query9_OnClick"></MenuItem>
+                </MenuItem>
+        </Menu>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Height="40"
+                    Background="Beige">
+
+        </StackPanel>
+        <TextBox Grid.Row="2"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 BorderThickness="0"
+                 Margin ="5"
+                 IsReadOnly="True"
+                 FontSize="16"
+                 FontWeight="Bold"
+        >
+            Сведения о работе птицефабрики
+        </TextBox>
+        <TabControl Grid.Row ="3">
+            <TabItem Header="Запрос 1" Name ="Query1Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query1}">
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Запрос 2" Name="Query2Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query2}">
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Запрос 3" Name="Query3Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query3}"/>
+            </TabItem>
+            <TabItem Header="Запрос 4" Name="Query4Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query4}"/>
+            </TabItem>
+            <TabItem Header="Запрос 5" Name="Query5Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query5}"/>
+            </TabItem>
+            <TabItem Header="Запрос 6" Name="Query6Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query6}"/>
+            </TabItem>
+            <TabItem Header="Запрос 7" Name="Query7Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query7}"/>
+            </TabItem>
+            <TabItem Header ="Запрос 8" Name="Query8Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query8}"/>
+            </TabItem>
+            <TabItem Header="Запрос 9" Name="Query9Tab">
+                <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query9}"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

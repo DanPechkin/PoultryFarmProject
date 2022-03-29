@@ -6,7 +6,7 @@
 
         public string Surname { get; set; }
 
-        public int IdChicken { get; set; }
+        
 
 
     }
