@@ -64,7 +64,7 @@ values
         {
             _context.Database.ExecuteSqlRaw(@"
 insert into Chickens 
-         (BreedId,  ChickenWeight, ChickenAge)
+         (BreedId,  ChickenWeight, ChickenAgeInMonths)
 values 
    (7,3,4),  --1
   (2,2.2,8), --2

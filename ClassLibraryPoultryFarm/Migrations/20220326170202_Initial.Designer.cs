@@ -92,7 +92,7 @@ namespace ClassLibraryPoultryFarm.Migrations
                     b.Property<int>("BreedId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ChickenAge")
+                    b.Property<int>("ChickenAgeInMonths")
                         .HasColumnType("int");
 
                     b.Property<double>("ChickenWeight")

@@ -10,7 +10,7 @@ namespace ClassLibraryPoultryFarm.Models
     {
         public int Id { get; set; }
         public double ChickenWeight { get; set; }
-        public int ChickenAge { get; set; }
+        public int ChickenAgeInMonths { get; set; }    
 
         public int BreedId { get; set; } // внешний ключ
         public Breed Breed { get; set; } // навигационное свойство

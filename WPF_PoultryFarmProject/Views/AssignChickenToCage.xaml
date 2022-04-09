@@ -1,34 +1,44 @@
-﻿<Window x:Class="WPF_PoultryFarmProject.Views.RemoveChicken"
+﻿<Window x:Class="WPF_PoultryFarmProject.Views.AssignChickenToCage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
         mc:Ignorable="d"
-        Title="Удаление курицы" Height="350" Width="400">
+        Title="Назначение клетки для курицы" Height="190" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="90"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
+                   TextAlignment="Center"
                    FontSize="13"
                    FontWeight="Bold"
-                   TextAlignment="Center"
-                   Margin ="0 10 0 0 ">
-                Выберите курицы для удаления
+                   Margin=" 0 10 0 0">
+              Выберите курицу и клетку  
         </TextBlock>
-        <ComboBox Grid.Row="1"
-                  Margin ="5 10 5 10">
-        </ComboBox>
-        <DataGrid Grid.Row="3"
-                  Margin="5 10 5 10">
-        </DataGrid>
-        <UniformGrid Grid.Row="4"
-                     Margin="0 45 0 0">
+        <DockPanel Grid.Row="1">
+            <TextBlock FontSize="13"
+                       FontWeight="DemiBold"
+                       Margin="5 13 5 5">
+                 Выберите курицу
+            </TextBlock>
+            <ComboBox Margin="5 13 10 9" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="2">
+            <TextBlock FontSize="13"
+                       FontWeight="DemiBold"
+                       Margin="5 13 5 5">
+                Выберите клетку
+            </TextBlock>
+            <ComboBox Margin="5 13 10 9" />
+        </DockPanel>
+
+        <UniformGrid Grid.Row="3">
             <Button Margin="5 15 4 0">
                 OK
             </Button>

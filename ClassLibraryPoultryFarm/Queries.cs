@@ -18,7 +18,7 @@ namespace ClassLibraryPoultryFarm
                     .Include(p => p.Chicken)
                     .ThenInclude(c => c.Breed)
                     .Where(p => Math.Abs(p.Chicken.ChickenWeight - weight) < 0.1 &&
-                                p.Chicken.ChickenAge == age &&
+                                p.Chicken.ChickenAgeInMonths == age &&
                                 p.Chicken.Breed.BreedName == breed)
                     .Select(a => new Query1()
                     {
@@ -62,11 +62,11 @@ namespace ClassLibraryPoultryFarm
                     .Include(c=>c.Chicken)
                     .ThenInclude(c=>c.Breed)
                     .ThenInclude(b=>b.Diet)
-                    .Where(c => c.Chicken.ChickenAge == age && c.Chicken.Breed.Diet.Number == diet)
+                    .Where(c => c.Chicken.ChickenAgeInMonths == age && c.Chicken.Breed.Diet.Number == diet)
                     .Select(g => new Query3
                     {
                         NumberOfCages = g.Id,
-                        ChickenAge = g.Chicken.ChickenAge,
+                        ChickenAge = g.Chicken.ChickenAgeInMonths,
                         DietNumber = g.Chicken.Breed.Diet.Number
                     });
 
@@ -199,6 +199,43 @@ namespace ClassLibraryPoultryFarm
                     });
 
                 return await result.ToListAsync();
+            }
+        }
+
+        //Справка о породе и информации о курах этой породы, имеющихся на фабрике. 
+
+        // Отчет должен включать следующую информацию: количество кур и средняя производительность по каждой породе,
+        // общее количество кур на фабрике, общее количество яиц, полученное птицефабрикой за отчетный месяц,
+        // общее количество работников и их распределение по цехам.
+
+        public static async Task<Report> MonthlyReport()
+        {
+            await using (AppDbContext context = new AppDbContext())
+            {
+                var averageProduction = await context.Breeds
+                    .Include(b => b.Chickens)
+                    .ThenInclude(c => c.Production)
+                    .ToDictionaryAsync(b => b,
+                        b => (b.Chickens.Count, b.Chickens.Average(c => c.Production.NumberOfEggs)));
+
+                var totalchickens = await context.Chickens.CountAsync();
+
+                var now = DateTime.Now;
+                var monthAgo = now.AddMonths(-1);
+                var numberofeggs = await context.Production
+                    .Where(p => p.Date >= monthAgo && p.Date <= now)
+                    .SumAsync(a => a.NumberOfEggs);
+
+                var totalworkers = await context.Workshops
+                    .Include(w => w.Workers)
+                    .ToDictionaryAsync(w => w, wr => wr.Workers.Count);
+                return new Report
+                {
+                    AverageProduction = averageProduction,
+                    TotalNumberOfChickens = totalchickens,
+                    TotalNumberOfEggs = numberofeggs,
+                    TotalNumberOfWorkers = totalworkers
+                };
             }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
         mc:Ignorable="d"
-        Title="AddWorker" Height="350" Width="400">
+        Title="Добавление сотрудника" Height="350" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height ="40"/>

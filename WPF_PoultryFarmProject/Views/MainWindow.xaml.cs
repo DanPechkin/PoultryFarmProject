@@ -35,7 +35,6 @@ namespace WPF_PoultryFarmProject
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         // Запрос 1

@@ -1,11 +1,11 @@
-﻿<Window x:Class="WPF_PoultryFarmProject.Views.AddChicken"
+﻿<Window x:Class="WPF_PoultryFarmProject.Views.AddCage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
         mc:Ignorable="d"
-        Title="Добавление курицы" Height="350" Width="400">
+        Title="Добавить клетку" Height="350" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -15,37 +15,38 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
+                   Margin="0 10 0 0"
                    FontSize="13"
                    FontWeight="Bold"
-                   Margin="0 10 0 0"
                    TextAlignment="Center">
-            Добавление информации о курице
+               Добавить клетку
         </TextBlock>
+
         <DockPanel Grid.Row="1">
             <TextBlock FontSize="13"
                        FontWeight="DemiBold"
-                       Margin="0 9 0 0">
-              Вес курицы 
+                       Margin="3 9 0 0">
+                Номер ряда 
             </TextBlock>
-            <TextBox Margin="39 9 15 5"/>
+            <TextBox Margin="40 9 15 7"/>
         </DockPanel>
 
         <DockPanel Grid.Row="2">
             <TextBlock FontSize="13"
                        FontWeight="DemiBold"
-                       Margin=" 0 9 0 0">
-                Возраст курицы
+                       Margin=" 3 9 0 0 ">
+                Номер клетки
             </TextBlock>
-            <TextBox Margin="13 9 15 5"/>
+            <TextBox Margin="28 9 15 7"/>
         </DockPanel>
 
         <DockPanel Grid.Row="3">
             <TextBlock FontSize="13"
                        FontWeight="DemiBold"
-                       Margin="0 9 0 0">
-               Порода    
+                       Margin=" 3 9 0 0 ">
+                Цех
             </TextBlock>
-            <ComboBox Margin="65 9 15 6 "/>
+            <ComboBox Margin="90 9 15 7"/>
         </DockPanel>
 
         <UniformGrid Grid.Row="4"
@@ -57,7 +58,6 @@
                 Отменить
             </Button>
         </UniformGrid>
-
 
     </Grid>
 </Window>
