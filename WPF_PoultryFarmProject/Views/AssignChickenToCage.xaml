@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
+        xmlns:viewModels="clr-namespace:WPF_PoultryFarmProject.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:AssignChickenToCageViewModel}"
         Title="Назначение клетки для курицы" Height="190" Width="400">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +28,30 @@
                        Margin="5 13 5 5">
                  Выберите курицу
             </TextBlock>
-            <ComboBox Margin="5 13 10 9" />
+            <ComboBox  
+                ItemsSource="{Binding Chickens}"
+                Margin="5 13 10 9">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                       <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                               <TextBlock Text="Id: " />
+                               <TextBlock Text="{Binding Id}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                               <TextBlock Text="Вес: " />
+                               <TextBlock Text="{Binding ChickenWeight}" />
+                            </StackPanel>
+
+                           <StackPanel Orientation="Horizontal">
+                               <TextBlock Text="Возраст: " />
+                               <TextBlock Text="{Binding ChickenAgeInMonths}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
         </DockPanel>
 
         <DockPanel Grid.Row="2">
@@ -35,7 +60,23 @@
                        Margin="5 13 5 5">
                 Выберите клетку
             </TextBlock>
-            <ComboBox Margin="5 13 10 9" />
+            <ComboBox Margin="5 13 10 9" 
+            ItemsSource="{Binding Cages}">
+                        <ItemsControl.ItemTemplate>
+                           <DataTemplate>
+                               <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ряд: "/>
+                                        <TextBlock Text="{Binding RowNumber}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                         <TextBlock Text="Номер: "/>
+                                         <TextBlock Text="{Binding CageNumber}"/>
+                                    </StackPanel>
+                               </StackPanel> 
+                           </DataTemplate>
+                       </ItemsControl.ItemTemplate>
+                </ComboBox>
         </DockPanel>
 
         <UniformGrid Grid.Row="3">

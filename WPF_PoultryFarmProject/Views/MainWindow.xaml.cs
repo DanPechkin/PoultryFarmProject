@@ -14,7 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClassLibraryPoultryFarm;
+using ClassLibraryPoultryFarm.Persistence;
 using ClassLibraryPoultryFarm.QueriesModels;
+using WPF_PoultryFarmProject.Views;
 
 namespace WPF_PoultryFarmProject
 {
@@ -35,6 +37,8 @@ namespace WPF_PoultryFarmProject
         public MainWindow()
         {
             InitializeComponent();
+
+            new AssignChickenToCage().Show();
         }
 
         // Запрос 1
