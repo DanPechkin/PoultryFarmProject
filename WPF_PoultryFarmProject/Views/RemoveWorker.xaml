@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
+        xmlns:viewModels="clr-namespace:WPF_PoultryFarmProject.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:RemoveWorkerViewModel}"
         Title="Удаление сотрудника" Height="150" Width="400">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,12 +27,30 @@
                        FontWeight="DemiBold">
                  Выбрать сотрудника
             </TextBlock>
-            <ComboBox Margin="5 13 0 9">
+            <ComboBox Margin="5 13 0 9"
+                      SelectedItem="{Binding SelectedWorker}"
+                      ItemsSource="{Binding Workers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Surname}"/>
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ComboBox>
         </DockPanel>
 
         <UniformGrid Grid.Row="2">
-            <Button Margin="5 15 4 0">
+            <Button Margin="5 15 4 0"
+                    Command="{Binding OkButtonCommand}">
                 OK
             </Button>
             <Button Margin=" 5 15 4 0">

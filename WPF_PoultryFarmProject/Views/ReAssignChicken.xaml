@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
+        xmlns:viewModels="clr-namespace:WPF_PoultryFarmProject.ViewModels"
         mc:Ignorable="d"
-        Title="Переназначить курицу" Height="350" Width="400">
+        d:DataContext="{d:DesignInstance viewModels:ReAssignChickenViewModel}"
+        Title="Переназначить курицу" Height="Auto" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -28,7 +32,12 @@
                        FontWeight="DemiBold">
                Курица, закрепленная за <LineBreak/> сотрудником
             </TextBlock>
-            <DataGrid>
+            <DataGrid
+                ItemsSource="{Binding Cages}"
+                SelectedItem="{Binding SelectedCage}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id курицы" Binding="{Binding ChickenId}"></DataGridTextColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
@@ -37,9 +46,41 @@
                        FontSize="12"
                        FontWeight="DemiBold"
             >
-         Список сотрудников <LineBreak/>     
+         Список сотрудников <LineBreak/>
             </TextBlock>
-
+            <ComboBox Margin="3 5 7 10"
+                      SelectedItem="{Binding SelectedWorker}"
+                      ItemsSource="{Binding Workers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text ="{Binding Surname}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
         </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center">
+            <Button Margin="5 15 4 0"
+                    Padding="15 5 15 5"
+                    Command="{Binding AssignChickenCommand}">
+                Прикрепить
+            </Button>
+        </StackPanel>
+        <UniformGrid Grid.Row="3" 
+                     Grid.ColumnSpan="2">
+            <Button Margin="5 15 4 0"
+                    Click="OkButton_OnClick">
+                OK
+            </Button>
+            <Button Margin="5 15 4 0"
+                    Click="CancelButton_OnClick">
+                Отмена
+            </Button>
+        </UniformGrid>
     </Grid>
 </Window>

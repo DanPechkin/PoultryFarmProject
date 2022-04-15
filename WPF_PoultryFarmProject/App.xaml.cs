@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ClassLibraryPoultryFarm.Persistence;
 
 namespace WPF_PoultryFarmProject
 {
@@ -13,5 +14,11 @@ namespace WPF_PoultryFarmProject
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            AppDbContext.ReCreate();
+        }
     }
 }

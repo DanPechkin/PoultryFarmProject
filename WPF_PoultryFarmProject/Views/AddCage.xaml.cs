@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_PoultryFarmProject.ViewModels;
 
 namespace WPF_PoultryFarmProject.Views
 {
@@ -22,6 +23,8 @@ namespace WPF_PoultryFarmProject.Views
         public AddCage()
         {
             InitializeComponent();
+
+            DataContext = new AddCageViewModel();
         }
     }
 }

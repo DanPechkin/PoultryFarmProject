@@ -4,16 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
+        xmlns:viewModels="clr-namespace:WPF_PoultryFarmProject.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:RemoveChickenViewModel}"
         Title="Удаление курицы" Height="350" Width="400">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="90"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <TextBlock Grid.Row="0"
                    FontSize="13"
                    FontWeight="Bold"
@@ -21,14 +22,41 @@
                    Margin ="0 10 0 0 ">
                 Выберите курицы для удаления
         </TextBlock>
-        <ComboBox Grid.Row="1"
-                  Margin ="5 10 5 10">
-        </ComboBox>
-        <DataGrid Grid.Row="3"
-                  Margin="5 10 5 10">
+        
+        <DataGrid Grid.Row="1"
+                  Margin="5 10 5 10"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Chickens}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Вес" Binding="{Binding ChickenWeight}"/>
+                <DataGridTextColumn Header="Возраст" Binding="{Binding ChickenAgeInMonths}"/>
+            </DataGrid.Columns>
+            <!--<ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id : "/>
+                            <TextBlock Text="{Binding Id}"/>
+                            <TextBlock Text=" "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Вес :"/>
+                            <TextBlock Text="{Binding ChickenWeight}"/>
+                            <TextBlock Text=" "/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Возраст: "/>
+                            <TextBlock Text="{Binding ChickenAgeInMonths}"/>
+                            <TextBlock Text="  "/>
+                        </StackPanel>
+                        </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>-->
         </DataGrid>
-        <UniformGrid Grid.Row="4"
-                     Margin="0 45 0 0">
+        <UniformGrid Grid.Row="2">
             <Button Margin="5 15 4 0">
                 OK
             </Button>

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ClassLibraryPoultryFarm.Models;
+using WPF_PoultryFarmProject.ViewModels;
 
 namespace WPF_PoultryFarmProject.Views
 {
@@ -19,9 +21,23 @@ namespace WPF_PoultryFarmProject.Views
     /// </summary>
     public partial class ReAssignChicken : Window
     {
-        public ReAssignChicken()
+        public ReAssignChicken(ICollection<Cage> cagesToAssign, ICollection<Worker> availableWorkers)
         {
             InitializeComponent();
+
+            DataContext = new ReAssignChickenViewModel(cagesToAssign, availableWorkers);
+        }
+
+        private void OkButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }

@@ -37,16 +37,19 @@
                             <StackPanel Orientation="Horizontal">
                                <TextBlock Text="Id: " />
                                <TextBlock Text="{Binding Id}" />
+                               <TextBlock Text="  "/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                <TextBlock Text="Вес: " />
                                <TextBlock Text="{Binding ChickenWeight}" />
+                               <TextBlock Text="  "/>
                             </StackPanel>
 
                            <StackPanel Orientation="Horizontal">
                                <TextBlock Text="Возраст: " />
                                <TextBlock Text="{Binding ChickenAgeInMonths}" />
+                               <TextBlock Text="  "/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -68,7 +71,8 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Ряд: "/>
                                         <TextBlock Text="{Binding RowNumber}"/>
-                                    </StackPanel>
+                                        <TextBlock Text="  "/>
+                            </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                          <TextBlock Text="Номер: "/>
                                          <TextBlock Text="{Binding CageNumber}"/>
