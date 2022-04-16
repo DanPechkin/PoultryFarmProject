@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibraryPoultryFarm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220326170202_Initial")]
+    [Migration("20220416124654_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,9 @@ namespace ClassLibraryPoultryFarm.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("BreedName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<int>("DietId")
                         .HasColumnType("int");
@@ -70,6 +72,8 @@ namespace ClassLibraryPoultryFarm.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("RowNumber", "CageNumber");
 
                     b.HasIndex("ChickenId")
                         .IsUnique()
@@ -152,19 +156,27 @@ namespace ClassLibraryPoultryFarm.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Passport")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Patronymic")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<int>("WorkshopId")
                         .HasColumnType("int");
@@ -190,7 +202,9 @@ namespace ClassLibraryPoultryFarm.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ShopName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -212,16 +226,18 @@ namespace ClassLibraryPoultryFarm.Migrations
                 {
                     b.HasOne("ClassLibraryPoultryFarm.Models.Chicken", "Chicken")
                         .WithOne("Cage")
-                        .HasForeignKey("ClassLibraryPoultryFarm.Models.Cage", "ChickenId");
+                        .HasForeignKey("ClassLibraryPoultryFarm.Models.Cage", "ChickenId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ClassLibraryPoultryFarm.Models.Worker", "Worker")
                         .WithMany("Cages")
-                        .HasForeignKey("WorkerId");
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ClassLibraryPoultryFarm.Models.Workshop", "Workshop")
                         .WithMany("Cages")
                         .HasForeignKey("WorkshopId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Chicken");

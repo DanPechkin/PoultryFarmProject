@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using ClassLibraryPoultryFarm.Models;
 using ClassLibraryPoultryFarm.Persistence;
 using Microsoft.EntityFrameworkCore;
+using WPF_PoultryFarmProject.Infrastructure;
 
 namespace WPF_PoultryFarmProject.ViewModels
 {
@@ -15,8 +16,13 @@ namespace WPF_PoultryFarmProject.ViewModels
     {
         public ObservableCollection<Chicken> Chickens { get; set; } = new ObservableCollection<Chicken>();
 
+        public Chicken SelectedChicken { get; set; }
+
+        public RelayCommand OkButton { get; set; }
+
         public RemoveChickenViewModel()
         {
+            OkButton = new RelayCommand(DeleteChicken);
             FillChickens();
         }
 
@@ -35,6 +41,22 @@ namespace WPF_PoultryFarmProject.ViewModels
                 {
                     Chickens.Add(chicken);
                 }
+            }
+        }
+
+        public async void DeleteChicken()
+        {
+            await DeleteChickenAsync();
+        }
+
+        public async Task DeleteChickenAsync()
+        {
+            await using (AppDbContext context = new AppDbContext())
+            {
+                context.Chickens.Remove(SelectedChicken);
+                Chickens.Remove(SelectedChicken);
+
+                await context.SaveChangesAsync();
             }
         }
     }

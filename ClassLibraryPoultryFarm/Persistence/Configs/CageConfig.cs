@@ -13,12 +13,14 @@ namespace ClassLibraryPoultryFarm.Persistence.Configs
     {
         public void Configure(EntityTypeBuilder<Cage> builder)
         {
+            builder.HasAlternateKey(c => new {c.RowNumber, c.CageNumber});
+
             builder
                 .HasOne(cage => cage.Workshop)
                 .WithMany(workshop => workshop.Cages)
                 .HasForeignKey(cage => cage.WorkshopId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasOne(cage => cage.Chicken)

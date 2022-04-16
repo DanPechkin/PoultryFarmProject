@@ -25,7 +25,7 @@ namespace WPF_PoultryFarmProject.Views
             InitializeComponent();
 
 
-            new RemoveWorker().Show();
+            new AddCage().Show();
         }
 
         // Запрос 1

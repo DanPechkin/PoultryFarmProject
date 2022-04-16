@@ -53,7 +53,8 @@
                     Command="{Binding OkButtonCommand}">
                 OK
             </Button>
-            <Button Margin=" 5 15 4 0">
+            <Button Margin=" 5 15 4 0"
+                    Click="CancelButton_OnClick">
                 Отменить
             </Button>
         </UniformGrid>

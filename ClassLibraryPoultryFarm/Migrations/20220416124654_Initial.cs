@@ -26,7 +26,7 @@ namespace ClassLibraryPoultryFarm.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShopName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShopName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     NumberOfRows = table.Column<int>(type: "int", nullable: false),
                     NumberOfCages = table.Column<int>(type: "int", nullable: false)
                 },
@@ -41,7 +41,7 @@ namespace ClassLibraryPoultryFarm.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreedName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BreedName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     AverageEggsNumber = table.Column<int>(type: "int", nullable: false),
                     AverageWeight = table.Column<double>(type: "float", nullable: false),
                     DietId = table.Column<int>(type: "int", nullable: false)
@@ -63,10 +63,10 @@ namespace ClassLibraryPoultryFarm.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Patronymic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Passport = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Patronymic = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Passport = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Salary = table.Column<int>(type: "int", nullable: false),
                     WorkshopId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -88,7 +88,7 @@ namespace ClassLibraryPoultryFarm.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ChickenWeight = table.Column<double>(type: "float", nullable: false),
-                    ChickenAge = table.Column<int>(type: "int", nullable: false),
+                    ChickenAgeInMonths = table.Column<int>(type: "int", nullable: false),
                     BreedId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -117,24 +117,24 @@ namespace ClassLibraryPoultryFarm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cages", x => x.Id);
+                    table.UniqueConstraint("AK_Cages_RowNumber_CageNumber", x => new { x.RowNumber, x.CageNumber });
                     table.ForeignKey(
                         name: "FK_Cages_Chickens_ChickenId",
                         column: x => x.ChickenId,
                         principalTable: "Chickens",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Cages_Workers_WorkerId",
                         column: x => x.WorkerId,
                         principalTable: "Workers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Cages_Workshops_WorkshopId",
                         column: x => x.WorkshopId,
                         principalTable: "Workshops",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

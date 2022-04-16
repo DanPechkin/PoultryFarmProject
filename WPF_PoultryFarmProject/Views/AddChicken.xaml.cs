@@ -16,7 +16,7 @@ using WPF_PoultryFarmProject.ViewModels;
 namespace WPF_PoultryFarmProject.Views
 {
     /// <summary>
-    /// Interaction logic for AddChicken.xaml
+    /// Interaction logic for AddCage.xaml
     /// </summary>
     public partial class AddChicken : Window
     {

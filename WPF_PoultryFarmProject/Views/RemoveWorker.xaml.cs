@@ -26,5 +26,10 @@ namespace WPF_PoultryFarmProject.Views
 
             DataContext = new RemoveWorkerViewModel();
         }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

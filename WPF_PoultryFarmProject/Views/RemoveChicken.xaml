@@ -26,7 +26,8 @@
         <DataGrid Grid.Row="1"
                   Margin="5 10 5 10"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding Chickens}">
+                  ItemsSource="{Binding Chickens}"
+                  SelectedItem ="{Binding SelectedChicken}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Вес" Binding="{Binding ChickenWeight}"/>
@@ -57,7 +58,8 @@
             </ItemsControl.ItemTemplate>-->
         </DataGrid>
         <UniformGrid Grid.Row="2">
-            <Button Margin="5 15 4 0">
+            <Button Margin="5 15 4 0"
+                    Command="{Binding OkButton}">
                 OK
             </Button>
             <Button Margin=" 5 15 4 0">
