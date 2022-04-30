@@ -16,15 +16,20 @@ using WPF_PoultryFarmProject.ViewModels;
 namespace WPF_PoultryFarmProject.Views
 {
     /// <summary>
-    /// Interaction logic for AssignChickenToCage.xaml
+    /// Interaction logic for AssignWorkerToCage.xaml
     /// </summary>
-    public partial class AssignChickenToCage : Window
+    public partial class AssignWorkerToCage : Window
     {
-        public AssignChickenToCage()
+        public AssignWorkerToCage()
         {
             InitializeComponent();
 
-            DataContext = new AssignChickenToCageViewModel();
+            DataContext = new AssignWorkerToCageViewModel();
+        }
+
+        private void AssignChicken_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -26,5 +26,10 @@ namespace WPF_PoultryFarmProject.Views
 
             DataContext = new AddWorkerViewModel();
         }
+
+        private void AddWorker_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

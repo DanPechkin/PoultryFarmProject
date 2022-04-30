@@ -23,11 +23,16 @@ namespace WPF_PoultryFarmProject.ViewModels
 
         public ReAssignChickenViewModel(ICollection<Cage> cagesToAssign, ICollection<Worker> availableWorkers)
         {
-            AssignChickenCommand = new RelayCommand(AssignChicken);
+            AssignChickenCommand = new RelayCommand(AssignChicken, IsAssignChickenCanExecute);
 
             Cages = new ObservableCollection<Cage>(cagesToAssign);
             Workers = new ObservableCollection<Worker>(availableWorkers);
         }
+
+        public bool IsAssignChickenCanExecute() =>
+            SelectedCage != null &&
+            SelectedWorker != null;
+
 
         private void AssignChicken()
         {

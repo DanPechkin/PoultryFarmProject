@@ -50,12 +50,13 @@
 
         <UniformGrid Grid.Row="2">
             <Button Margin="5 15 4 0"
-                    Command="{Binding OkButtonCommand}">
+                    Command="{Binding OkButtonCommand}"
+                    Click="RemoveWorker_OnClick">
                 OK
             </Button>
             <Button Margin=" 5 15 4 0"
                     Click="CancelButton_OnClick">
-                Отменить
+                Закрыть
             </Button>
         </UniformGrid>
     </Grid>

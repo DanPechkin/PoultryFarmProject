@@ -78,11 +78,12 @@ namespace WPF_PoultryFarmProject.ViewModels
                 // Если пользователь нажал "Отмена" - выйдем из метода, не сохраняя изменения в бд
                 if (isAccepted == false)
                     return;
-
+                
                 // Если пользователь нажал "Ок" сохраним изменения в бд
                 await dbContext.SaveChangesAsync();
                 // Удалим выбранного работника
                 Workers.Remove(SelectedWorker);
+
             }
         }
     }

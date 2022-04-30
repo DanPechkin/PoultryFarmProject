@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPF_PoultryFarmProject.Views.AssignChickenToCage"
+﻿<Window x:Class="WPF_PoultryFarmProject.Views.AssignWorkerToCage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:WPF_PoultryFarmProject.Views"
         xmlns:viewModels="clr-namespace:WPF_PoultryFarmProject.ViewModels"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:AssignChickenToCageViewModel}"
-        Title="Назначение клетки для курицы" Height="190" Width="400">
+        d:DataContext="{d:DesignInstance viewModels:AssignWorkerToCageViewModel}"
+        Title="Назначение сотруднику клетки" Height="230" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
@@ -20,51 +21,19 @@
                    FontSize="13"
                    FontWeight="Bold"
                    Margin=" 0 10 0 0">
-              Выберите курицу и клетку  
+              Выберите клетку для сотрудника 
         </TextBlock>
+       
+
         <DockPanel Grid.Row="1">
-            <TextBlock FontSize="13"
-                       FontWeight="DemiBold"
-                       Margin="5 13 5 5">
-                 Выберите курицу
-            </TextBlock>
-            <ComboBox  
-                ItemsSource="{Binding Chickens}"
-                Margin="5 13 10 9">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                       <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Horizontal">
-                               <TextBlock Text="Id: " />
-                               <TextBlock Text="{Binding Id}" />
-                               <TextBlock Text="  "/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                               <TextBlock Text="Вес: " />
-                               <TextBlock Text="{Binding ChickenWeight}" />
-                               <TextBlock Text="  "/>
-                            </StackPanel>
-
-                           <StackPanel Orientation="Horizontal">
-                               <TextBlock Text="Возраст: " />
-                               <TextBlock Text="{Binding ChickenAgeInMonths}" />
-                               <TextBlock Text="  "/>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ComboBox>
-        </DockPanel>
-
-        <DockPanel Grid.Row="2">
             <TextBlock FontSize="13"
                        FontWeight="DemiBold"
                        Margin="5 13 5 5">
                 Выберите клетку
             </TextBlock>
-            <ComboBox Margin="5 13 10 9" 
-            ItemsSource="{Binding Cages}">
+            <ComboBox Margin="35 13 10 9" 
+            ItemsSource="{Binding Cages}"
+            SelectedItem="{Binding SelectedItemсCage}">
                         <ItemsControl.ItemTemplate>
                            <DataTemplate>
                                <StackPanel Orientation="Horizontal">
@@ -83,12 +52,42 @@
                 </ComboBox>
         </DockPanel>
 
-        <UniformGrid Grid.Row="3">
-            <Button Margin="5 15 4 0">
+        <DockPanel Grid.Row="2">
+            <TextBlock FontSize="13"
+                       FontWeight="DemiBold"
+                       Margin="5 13 9 5">
+                Выберите сотрудника
+            </TextBlock>
+            <ComboBox Margin="5 13 9 9"
+                      SelectedItem="{Binding SelectedWorker}"
+                      ItemsSource="{Binding Workers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Surname}"/>
+                                <TextBlock Text=" "/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+
+                <UniformGrid Grid.Row="3">
+            <Button Margin="5 15 4 0"
+                    Command="{Binding OKButton}"
+                    Click="AssignChicken_OnClick">
                 OK
             </Button>
-            <Button Margin=" 5 15 4 0">
-                Отменить
+            <Button Margin=" 5 15 4 0" IsCancel="True"
+                    Click="AssignChicken_OnClick">
+                Закрыть
             </Button>
         </UniformGrid>
 

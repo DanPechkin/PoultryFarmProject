@@ -78,7 +78,7 @@
                 OK
             </Button>
             <Button Margin="5 15 4 0"
-                    Click="CancelButton_OnClick">
+                    Click="CancelButton_OnClick" IsCancel="True">
                 Отмена
             </Button>
         </UniformGrid>

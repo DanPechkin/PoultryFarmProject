@@ -14,7 +14,8 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    FontSize="13"
@@ -50,7 +51,8 @@
                Порода    
             </TextBlock>
             <ComboBox Margin="65 9 15 6 "
-                      ItemsSource="{Binding Breeds}">
+                      ItemsSource="{Binding Breeds}"
+                      SelectedItem="{Binding SelectedItem}">
                  <ItemsControl.ItemTemplate>
                       <DataTemplate>
                           <StackPanel>
@@ -61,13 +63,43 @@
             </ComboBox>
         </DockPanel>
 
-        <UniformGrid Grid.Row="4"
+        <DockPanel Grid.Row="4">
+            <TextBlock FontSize="13"
+                       FontWeight="DemiBold"
+                       Margin="0 9 0 0">
+                    Клетки
+            </TextBlock>
+            <ComboBox Margin="65 9 15  6"
+                      ItemsSource="{Binding Cages}"
+                      SelectedItem="{Binding SelectedCage}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Ряд: "/>
+                                <TextBlock Text="{Binding RowNumber}"/>
+                                <TextBlock Text="  "/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Номер: "/>
+                                <TextBlock Text="{Binding CageNumber}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+
+                <UniformGrid Grid.Row="5"
                      Margin="0 35 0 0">
-            <Button Margin="5 15 4 0">
+            <Button Margin="5 15 4 0"
+                    Command="{Binding OKButton}"
+                    Click="Cancel_OnClick">
                 OK
             </Button>
-            <Button Margin=" 5 15 4 0">
-                Отменить
+            <Button Margin=" 5 15 4 0" IsCancel="True"
+                    Click="Cancel_OnClick">
+                Закрыть
             </Button>
         </UniformGrid>
 

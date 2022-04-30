@@ -7,7 +7,7 @@
         xmlns:viewModels="clr-namespace:WPF_PoultryFarmProject.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:AddWorkerViewModel}"
-        Title="Добавление сотрудника" Height="350" Width="400">
+        Title="Добавление сотрудника" Height="450" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height ="40"/>
@@ -16,7 +16,8 @@
             <RowDefinition Height ="40"/>
             <RowDefinition Height ="40"/>
             <RowDefinition Height ="40"/>
-            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height="40"/>
+                <RowDefinition Height ="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    TextAlignment="Center"
@@ -76,14 +77,37 @@
             <TextBox Margin="25 9 15 5"
                      Text="{Binding Salary}"/>
         </DockPanel>
-        
-        <UniformGrid Grid.Row="6"
+
+        <DockPanel Grid.Row="6">
+            <TextBlock Margin="5 13 5 5"
+                       FontSize="13"
+                       FontWeight="DemiBold">
+                Выбрать цех
+            </TextBlock>
+            <ComboBox Margin="5 13 0 9"
+                      SelectedItem="{Binding SelectedWorkshop}"
+                      ItemsSource="{Binding Workshops}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Название:  "/>
+                            <TextBlock Text="{Binding ShopName}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+
+                <UniformGrid Grid.Row="7"
                      Margin="0 15 0 0">
-            <Button Margin="5 15 4 0">
+            <Button Margin="5 15 4 0" 
+                    Command="{Binding OKButton}" 
+                    Click="AddWorker_OnClick">
                 OK
             </Button>
-            <Button Margin=" 5 15 4 0">
-                Отменить
+            <Button Margin=" 5 15 4 0" IsCancel="True"
+                    Click="AddWorker_OnClick">
+                Закрыть
             </Button>
         </UniformGrid>
 

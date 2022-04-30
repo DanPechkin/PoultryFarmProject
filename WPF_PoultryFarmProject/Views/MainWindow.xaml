@@ -39,6 +39,13 @@
                     Orientation="Horizontal"
                     Height="40"
                     Background="Beige">
+            <Button Click="Button1_OnClick">Button1</Button>
+            <Button Click="Button2_OnClick">Button2</Button>
+            <Button Click="Button3_OnClick">Button3</Button>
+            <Button Click="Button4_OnClick">Button4</Button>
+            <Button Click="Button5_OnClick">Button5</Button>
+            <Button Click="Button6_OnClick">Button6</Button>
+            
 
         </StackPanel>
         <TextBox Grid.Row="2"

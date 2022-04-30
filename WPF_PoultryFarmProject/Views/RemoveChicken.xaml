@@ -59,11 +59,13 @@
         </DataGrid>
         <UniformGrid Grid.Row="2">
             <Button Margin="5 15 4 0"
-                    Command="{Binding OkButton}">
+                    Command="{Binding OkButton}"
+                    Click="RemoveChicken_OnClick">
                 OK
             </Button>
-            <Button Margin=" 5 15 4 0">
-                Отменить
+            <Button Margin=" 5 15 4 0" IsCancel="True"
+                    Click="RemoveChicken_OnClick">
+                Закрыть
             </Button>
         </UniformGrid>
 

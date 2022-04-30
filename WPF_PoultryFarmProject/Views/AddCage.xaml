@@ -70,11 +70,13 @@
             <UniformGrid Grid.Row="5"
                      Margin="0 35 0 0">
             <Button Margin="5 15 4 0"
-                    Command="{Binding OKButton}">
+                    Command="{Binding OKButton}"
+                    Click="ButtonBase_OnClick">
                 OK
             </Button>
-            <Button Margin=" 5 15 4 0">
-                Отменить
+            <Button Margin=" 5 15 4 0" IsCancel="True"
+                    Click="ButtonBase_OnClick">
+                Закрыть
             </Button>
         </UniformGrid>
 

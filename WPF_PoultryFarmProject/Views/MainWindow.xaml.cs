@@ -24,8 +24,6 @@ namespace WPF_PoultryFarmProject.Views
         {
             InitializeComponent();
 
-
-            new AddCage().Show();
         }
 
         // Запрос 1
@@ -186,5 +184,41 @@ namespace WPF_PoultryFarmProject.Views
         }
 
 
+        private void Button1_OnClick(object sender, RoutedEventArgs e)
+        {
+            AddCage addcage = new AddCage();
+            addcage.Show();
+        }
+
+        private void Button2_OnClick(object sender, RoutedEventArgs e)
+        {
+            AddChicken addchiken = new AddChicken();
+            addchiken.Show();
+        }
+
+        private void Button3_OnClick(object sender, RoutedEventArgs e)
+        {
+            AddWorker addworker = new AddWorker();
+            addworker.Show();
+        }
+
+
+        private void Button4_OnClick(object sender, RoutedEventArgs e)
+        {
+            AssignWorkerToCage assignchicken = new AssignWorkerToCage();
+            assignchicken.Show();
+        }
+
+        private void Button5_OnClick(object sender, RoutedEventArgs e)
+        {
+            RemoveChicken removechicken = new RemoveChicken();
+            removechicken.Show();
+        }
+
+        private void Button6_OnClick(object sender, RoutedEventArgs e)
+        {
+            RemoveWorker removeworker = new RemoveWorker();
+            removeworker.Show();
+        }
     }
 }

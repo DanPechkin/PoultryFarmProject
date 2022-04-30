@@ -31,5 +31,10 @@ namespace WPF_PoultryFarmProject.Views
         {
             Close();
         }
+
+        private void RemoveWorker_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

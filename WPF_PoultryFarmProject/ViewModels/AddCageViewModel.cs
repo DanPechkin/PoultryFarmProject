@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ClassLibraryPoultryFarm.Models;
 using ClassLibraryPoultryFarm.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -83,6 +84,8 @@ namespace WPF_PoultryFarmProject.ViewModels
                 context.Cages.Update(newCage);
                 await context.SaveChangesAsync();
             }
+
+            MessageBox.Show("Запись добавлена в базу данных", "Успех!");
         }
 
         private async Task<bool> Validate()

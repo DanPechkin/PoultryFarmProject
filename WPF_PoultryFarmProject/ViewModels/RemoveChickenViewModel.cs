@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Animation;
 using ClassLibraryPoultryFarm.Models;
 using ClassLibraryPoultryFarm.Persistence;
@@ -22,7 +23,7 @@ namespace WPF_PoultryFarmProject.ViewModels
 
         public RemoveChickenViewModel()
         {
-            OkButton = new RelayCommand(DeleteChicken);
+            OkButton = new RelayCommand(DeleteChicken, IsRemoveChickenCanExecute);
             FillChickens();
         }
 
@@ -42,7 +43,12 @@ namespace WPF_PoultryFarmProject.ViewModels
                     Chickens.Add(chicken);
                 }
             }
+
+            
         }
+
+        public bool IsRemoveChickenCanExecute() =>
+            SelectedChicken != null;
 
         public async void DeleteChicken()
         {
@@ -58,6 +64,8 @@ namespace WPF_PoultryFarmProject.ViewModels
 
                 await context.SaveChangesAsync();
             }
+
+            MessageBox.Show("Курица удалена", "Успех!");
         }
     }
 }

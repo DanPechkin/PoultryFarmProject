@@ -26,5 +26,10 @@ namespace WPF_PoultryFarmProject.Views
 
             DataContext = new RemoveChickenViewModel();
         }
+
+        private void RemoveChicken_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -26,5 +26,10 @@ namespace WPF_PoultryFarmProject.Views
 
             DataContext = new AddCageViewModel();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
