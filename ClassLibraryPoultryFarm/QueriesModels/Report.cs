@@ -9,7 +9,7 @@ namespace ClassLibraryPoultryFarm.QueriesModels
 {
     public class Report
     {
-        public Dictionary<Breed, (int NumberOfChickens, double AverageProduction)> AverageProduction { get; set; } // средняя производительность по каждой породе 
+        public Dictionary<Breed, Tuple<int, double>> AverageProduction { get; set; } // средняя производительность по каждой породе 
 
         public int TotalNumberOfChickens { get; set; } // общее количество кур на фабрике
 

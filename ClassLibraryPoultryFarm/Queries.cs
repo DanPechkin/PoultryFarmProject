@@ -216,12 +216,13 @@ namespace ClassLibraryPoultryFarm
                     .Include(b => b.Chickens)
                     .ThenInclude(c => c.Production)
                     .ToDictionaryAsync(b => b,
-                        b => (b.Chickens.Count, b.Chickens.Average(c => c.Production.NumberOfEggs)));
+                        b => new Tuple<int, double>(b.Chickens.Count, b.Chickens.Average(c => c.Production.NumberOfEggs)));
 
                 var totalchickens = await context.Chickens.CountAsync();
 
                 var now = DateTime.Now;
                 var monthAgo = now.AddMonths(-1);
+
                 var numberofeggs = await context.Production
                     .Where(p => p.Date >= monthAgo && p.Date <= now)
                     .SumAsync(a => a.NumberOfEggs);

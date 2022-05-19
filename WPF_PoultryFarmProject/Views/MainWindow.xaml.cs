@@ -1,16 +1,20 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using ClassLibraryPoultryFarm;
 using ClassLibraryPoultryFarm.QueriesModels;
+using WPF_PoultryFarmProject.Annotations;
 
 namespace WPF_PoultryFarmProject.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private Report _monthlyReport;
         public ObservableCollection<Query1> Query1 { get; set; } = new(); // Запрос 1 
         public ObservableCollection<Query2> Query2 { get; set; } = new(); // Запрос 2
         public ObservableCollection<Query3> Query3 { get; set; } = new(); // Запрос 3
@@ -20,6 +24,17 @@ namespace WPF_PoultryFarmProject.Views
         public ObservableCollection<Query7> Query7 { get; set; } = new(); // Запрос 7
         public ObservableCollection<Query8> Query8 { get; set; } = new(); // Запрос 8 
         public ObservableCollection<Query9> Query9 { get; set; } = new(); // Запрос 9 
+
+        public Report MonthlyReport
+        {
+            get => _monthlyReport;
+            set
+            {
+                _monthlyReport = value;
+                OnPropertyChanged();
+            }
+        } // Отчет
+
         public MainWindow()
         {
             InitializeComponent();
@@ -183,6 +198,20 @@ namespace WPF_PoultryFarmProject.Views
             }
         }
 
+        // Отчет 
+
+        private async void Report_OnClick(object sender, RoutedEventArgs e)
+        {
+            await ReportAsync();
+        }
+
+        private async Task ReportAsync()
+        {
+            ReportTab.IsSelected = true;
+            var result = await Queries.MonthlyReport();
+            MonthlyReport = result;
+        }
+
 
         private void Button1_OnClick(object sender, RoutedEventArgs e)
         {
@@ -219,6 +248,19 @@ namespace WPF_PoultryFarmProject.Views
         {
             RemoveWorker removeworker = new RemoveWorker();
             removeworker.Show();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void On_Exit(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

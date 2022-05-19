@@ -7,12 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\cage-add.png" />
+    <None Remove="Images\cage.png" />
+    <None Remove="Images\chicken-leg.png" />
+    <None Remove="Images\hen.png" />
+    <None Remove="Images\laborer.png" />
+    <None Remove="Images\office-worker.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Images\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibraryPoultryFarm\ClassLibraryPoultryFarm.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\cage-add.png" />
+    <Resource Include="Images\cage.png" />
+    <Resource Include="Images\chicken-leg.png" />
+    <Resource Include="Images\hen.png" />
+    <Resource Include="Images\laborer.png" />
+    <Resource Include="Images\office-worker.png" />
   </ItemGroup>
 
 </Project>

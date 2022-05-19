@@ -19,7 +19,7 @@
         <!--Пункты меню-->
         <Menu Grid.Row="0">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход">
+                <MenuItem Header="Выход" Click="On_Exit">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Запросы">
@@ -32,20 +32,87 @@
                 <MenuItem Header="Сколько кур каждой породы в каждом цеху" Click="Query7_OnClick"></MenuItem>
                 <MenuItem Header="Количество кур, обслуживаемых каждым сотрудником" Click="Query8_OnClick"></MenuItem>
                 <MenuItem Header="Разница между показателями породы и средними показателями по птицефабрике" Click="Query9_OnClick"></MenuItem>
-                </MenuItem>
+                <MenuItem Header="Отчет за месяц" Click="Report_OnClick"/>
+            </MenuItem>
         </Menu>
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
-                    Height="40"
+                    
                     Background="Beige">
-            <Button Click="Button1_OnClick">Button1</Button>
-            <Button Click="Button2_OnClick">Button2</Button>
-            <Button Click="Button3_OnClick">Button3</Button>
-            <Button Click="Button4_OnClick">Button4</Button>
-            <Button Click="Button5_OnClick">Button5</Button>
-            <Button Click="Button6_OnClick">Button6</Button>
-            
+            <Button Click="Button1_OnClick" Width="60">
+                <Button.Content>
+                    <StackPanel  Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="../Images/cage.png" Height="30"></Image>
+                        <StackPanel.ToolTip>
+                            <ToolTip>
+                                Добавить клетку
+                            </ToolTip>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Click="Button2_OnClick" Width="60">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="../Images/hen.png" Height="29"></Image>
+                        <StackPanel.ToolTip>
+                            <ToolTip>
+                                Добавить курицу
+                            </ToolTip>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Click="Button3_OnClick" Width="60">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="../Images/office-worker.png" Height="30"></Image>
+                        <StackPanel.ToolTip>
+                            <ToolTip>
+                                Добавить сотрудника
+                            </ToolTip>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Click="Button4_OnClick">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="../Images/cage-add.png" Height="30"/>
+                        <StackPanel.ToolTip>
+                            <ToolTip>
+                                Назначение клетки
+                            </ToolTip>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Click="Button5_OnClick">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="../Images/chicken-leg.png" Height="30"/>
+                        <StackPanel.ToolTip>
+                            <ToolTip>
+                                Удаление курицы
+                            </ToolTip>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Click="Button6_OnClick">
+                <Button.Content>
+                    <StackPanel>
+                        <Image Source="../Images/laborer.png" Height="30"/>
+                        <StackPanel.ToolTip>
+                            <ToolTip>
+                                Увольнение сотрудника
+                            </ToolTip>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
 
         </StackPanel>
         <TextBox Grid.Row="2"
@@ -88,6 +155,29 @@
             </TabItem>
             <TabItem Header="Запрос 9" Name="Query9Tab">
                 <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding ElementName=This, Path=Query9}"/>
+            </TabItem>
+            <TabItem Header="Отчет" Name="ReportTab">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Общее число куриц"/>
+                        <TextBlock Text="{Binding ElementName=This, Path=MonthlyReport.TotalNumberOfChickens}" Margin="0 0 10 0"/>
+                        <TextBlock Text ="Общее количество яиц"/>
+                        <TextBlock Text="{Binding ElementName=This, Path=MonthlyReport.TotalNumberOfEggs}"/>
+                    </StackPanel>
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ElementName=This, Path=MonthlyReport.AverageProduction}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Порода" Binding="{Binding Key.BreedName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Количество кур" Binding="{Binding Value.Item1}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Средняя производительность" Binding="{Binding Value.Item2}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ElementName=This, Path=MonthlyReport.TotalNumberOfWorkers}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Цех" Binding="{Binding Key.ShopName}"/>
+                            <DataGridTextColumn Header="Количество работников" Binding="{Binding Value}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </TabItem>
         </TabControl>
 
